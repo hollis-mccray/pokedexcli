@@ -17,7 +17,7 @@ type locationData struct {
 	} `json:"results"`
 }
 
-func getMaps(c cliConfig) error {
+func GetMaps(c cliConfig) error {
 	addr := *c.Next
 	res, err := http.Get(addr)
 	if err != nil {
