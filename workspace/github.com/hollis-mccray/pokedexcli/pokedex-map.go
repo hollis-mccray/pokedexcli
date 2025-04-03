@@ -1,4 +1,4 @@
-package pokedex-api
+package pokeapi
 
 import (
 	"fmt"

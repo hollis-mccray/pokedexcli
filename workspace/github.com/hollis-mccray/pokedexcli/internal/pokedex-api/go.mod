@@ -1,3 +1,3 @@
-module pokedex-api
+module pokeapi
 
 go 1.24.1

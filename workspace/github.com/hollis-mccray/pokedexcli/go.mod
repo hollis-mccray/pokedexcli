@@ -1,3 +1,3 @@
-module github.com/hollis-mccray/pokedexcli
+module pokedexcli
 
 go 1.24.1
