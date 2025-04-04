@@ -6,7 +6,7 @@ import (
 	"github.com/hollis-mccray/pokedexcli/internal/pokeapi"
 )
 
-func commandExit(c configAPI) error {
+func commandExit(c Configuration) error {
 	fmt.Println("Closing the Pokedex... Goodbye!")
 	os.Exit(0)
 	return nil

@@ -11,7 +11,7 @@ import (
 func startRepl() {
 	reader := bufio.NewScanner(os.Stdin)
 	n := "https://pokeapi.co/api/v2/location-area/"
-	var config pokeapi.configAPI
+	var config pokeapi.Configuration
 	config.Previous = nil
 	config.Next = &n
 	for {
@@ -44,7 +44,7 @@ func cleanInput(text string) []string {
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(configAPI) error
+	callback    func(Configuration) error
 }
 
 func (c cliCommand) menuString() string {
