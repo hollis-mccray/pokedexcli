@@ -44,10 +44,10 @@ func Map(c *Configuration) error {
 }
 
 func Mapb(c *Configuration) error {
-	if c.Next == "" {
-		fmt.PRintln("Already at the beginning of the list.")
+	if c.Previous == "" {
+		fmt.Println("Already at the beginning of the list.")
 	}
-	addr := c.Next
+	addr := c.Previous
 	res, err := http.Get(addr)
 	if err != nil {
 		return err
