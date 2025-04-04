@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
-	"github.com/hollis-mccray/pokedexcli/internal/util"
+	"github.com/hollis-mccray/pokedexcli/internal/pokeapi"
 )
 
 func commandExit(c configuration) error {

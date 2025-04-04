@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/hollis-mccray/pokedexcli/internal/util"
+	"github.com/hollis-mccray/pokedexcli/internal/pokeapi"
 )
 
 func commandHelp(c configuration) error {

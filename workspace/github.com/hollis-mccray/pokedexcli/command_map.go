@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/hollis-mccray/pokedexcli/internal/util"
 	"github.com/hollis-mccray/pokedexcli/internal/pokeapi"
 )
 
