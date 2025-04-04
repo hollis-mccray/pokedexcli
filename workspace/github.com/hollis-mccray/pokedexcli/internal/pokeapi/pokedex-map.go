@@ -5,7 +5,6 @@ import (
 	"io"
 	"net/http"
 	"encoding/json"
-	"github.com/hollis-mccray/pokedexcli/internal/util"
 )
 
 type locationData struct {
