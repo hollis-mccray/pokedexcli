@@ -18,7 +18,7 @@ type locationData struct {
 }
 
 func GetMaps(c *Configuration) error {
-	addr := *c.Next
+	addr := c.Next
 	res, err := http.Get(addr)
 	if err != nil {
 		return err
@@ -35,7 +35,7 @@ func GetMaps(c *Configuration) error {
 	for _, location := range data.Results {
 		fmt.Println(location.Name)
 	}
-	(*c).Previous = addr
-	(*c).Next = data.Next
+	c.Previous = addr
+	c.Next = data.Next
 	return nil
 }
