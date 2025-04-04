@@ -28,7 +28,7 @@ func startRepl() {
 			fmt.Println("Unknown Command")
 			continue
 		}
-		err := command.callback(config)
+		err := command.callback(&config)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -44,7 +44,7 @@ func cleanInput(text string) []string {
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(Configuration) error
+	callback    func(*pokeapi.Configuration) error
 }
 
 func (c cliCommand) menuString() string {
