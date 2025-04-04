@@ -1,6 +1,6 @@
 package pokeapi
 
 type Configuration struct {
-	Next     *string
-	Previous *string
+	Next     string
+	Previous string
 }
