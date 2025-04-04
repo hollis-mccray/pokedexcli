@@ -5,7 +5,7 @@ import (
 	"github.com/hollis-mccray/pokedexcli/internal/pokeapi"
 )
 
-func commandHelp(c configuration) error {
+func commandHelp(c configAPI) error {
 	fmt.Println("Welcome to the Pokedex!")
 	fmt.Println("Usage:\n")
 	for _, command := range listCommands() {
