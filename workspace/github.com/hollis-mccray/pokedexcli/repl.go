@@ -10,10 +10,9 @@ import (
 
 func startRepl() {
 	reader := bufio.NewScanner(os.Stdin)
-	n := "https://pokeapi.co/api/v2/location-area/"
 	var config pokeapi.Configuration
-	config.Previous = nil
-	config.Next = &n
+	config.Previous = ""
+	config.Next = "https://pokeapi.co/api/v2/location-area/"
 	for {
 		fmt.Print("Pokedex > ")
 		reader.Scan()
@@ -57,6 +56,11 @@ func listCommands() map[string]cliCommand {
 			name:        "map",
 			description: "Displays the next twenty locations in Pokemon",
 			callback:    commandMap,
+		},
+		"mapb": {
+			name:        "mapb",
+			description: "Displays the previous twenty locations in Pokemon",
+			callback:    commandMapb,
 		},
 		"help": {
 			name:        "help",

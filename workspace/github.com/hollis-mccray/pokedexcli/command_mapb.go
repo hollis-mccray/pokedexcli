@@ -4,7 +4,7 @@ import (
 	"github.com/hollis-mccray/pokedexcli/internal/pokeapi"
 )
 
-func commandMap(c *pokeapi.Configuration) error {
-	pokeapi.Map(c)
+func commandMapb(c *pokeapi.Configuration) error {
+	pokeapi.Mapb(c)
 	return nil
 }
