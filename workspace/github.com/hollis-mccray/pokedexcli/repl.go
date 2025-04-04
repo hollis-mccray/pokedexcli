@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"github.com/hollis-mccray/pokedexcli/internal/util"
 )
 
 func startRepl() {
 	reader := bufio.NewScanner(os.Stdin)
-	config := cliConfig{}
 	n := "https://pokeapi.co/api/v2/location-area/"
 	config.Previous = nil
 	config.Next = &n
@@ -43,12 +43,7 @@ func cleanInput(text string) []string {
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(cliConfig) error
-}
-
-type cliConfig struct {
-	Next     *string
-	Previous *string
+	callback    func(configuration) error
 }
 
 func (c cliCommand) menuString() string {

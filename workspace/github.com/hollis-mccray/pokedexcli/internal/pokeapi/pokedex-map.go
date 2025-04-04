@@ -5,6 +5,7 @@ import (
 	"io"
 	"net/http"
 	"encoding/json"
+	"github.com/hollis-mccray/pokedexcli/internal/util"
 )
 
 type locationData struct {
@@ -17,7 +18,7 @@ type locationData struct {
 	} `json:"results"`
 }
 
-func GetMaps(c cliConfig) error {
+func GetMaps(c configuration) error {
 	addr := *c.Next
 	res, err := http.Get(addr)
 	if err != nil {
