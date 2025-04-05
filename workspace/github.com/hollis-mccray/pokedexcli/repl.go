@@ -8,11 +8,22 @@ import (
 	"github.com/hollis-mccray/pokedexcli/internal/pokeapi"
 )
 
+type cliCommand struct {
+	name        string
+	description string
+	callback    func(*pokeapi.Configuration) error
+}
+
+type config struct {
+	Next     string
+	Previous string
+}
+
 func startRepl() {
 	reader := bufio.NewScanner(os.Stdin)
-	var config pokeapi.Configuration
-	config.Previous = ""
-	config.Next = "https://pokeapi.co/api/v2/location-area/"
+	var cfg config
+	cfg.Previous = ""
+	cfg.Next = "https://pokeapi.co/api/v2/location-area/"
 	for {
 		fmt.Print("Pokedex > ")
 		reader.Scan()
@@ -27,7 +38,7 @@ func startRepl() {
 			fmt.Println("Unknown Command")
 			continue
 		}
-		err := command.callback(&config)
+		err := command.callback(&cfg)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -38,12 +49,6 @@ func cleanInput(text string) []string {
 	lower := strings.ToLower(text)
 	words := strings.Fields(lower)
 	return words
-}
-
-type cliCommand struct {
-	name        string
-	description string
-	callback    func(*pokeapi.Configuration) error
 }
 
 func (c cliCommand) menuString() string {

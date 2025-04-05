@@ -17,54 +17,19 @@ type locationData struct {
 	} `json:"results"`
 }
 
-func Map(c *Configuration) error {
-	if c.Next == "" {
-		fmt.Println("Already at the end of the list.")
-	}
-	addr := c.Next
-	res, err := http.Get(addr)
+func ListLocationData(url string) locationData, err {
+	data := locationData{}
+	res, err := http.Get(url)
 	if err != nil {
-		return err
+		return locationData{}, err
 	}
 	body, err := io.ReadAll(res.Body)
 	if err != nil {
-		return err
+		return locationData{}, err
 	}
-	data := locationData{}
 	err = json.Unmarshal(body, &data)
 	if err != nil {
-		return err
+		return locationData{}, err
 	}
-	for _, location := range data.Results {
-		fmt.Println(location.Name)
-	}
-	c.Previous = addr
-	c.Next = data.Next
-	return nil
-}
-
-func Mapb(c *Configuration) error {
-	if c.Previous == "" {
-		fmt.Println("Already at the beginning of the list.")
-	}
-	addr := c.Previous
-	res, err := http.Get(addr)
-	if err != nil {
-		return err
-	}
-	body, err := io.ReadAll(res.Body)
-	if err != nil {
-		return err
-	}
-	data := locationData{}
-	err = json.Unmarshal(body, &data)
-	if err != nil {
-		return err
-	}
-	for _, location := range data.Results {
-		fmt.Println(location.Name)
-	}
-	c.Next = addr
-	c.Previous = data.Previous
-	return nil
+	return data, nil
 }
