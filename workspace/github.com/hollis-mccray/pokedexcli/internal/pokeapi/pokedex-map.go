@@ -17,7 +17,7 @@ type locationData struct {
 	} `json:"results"`
 }
 
-func ListLocationData(url string) locationData, err {
+func ListLocationData(url string) (locationData, err) {
 	data := locationData{}
 	res, err := http.Get(url)
 	if err != nil {
