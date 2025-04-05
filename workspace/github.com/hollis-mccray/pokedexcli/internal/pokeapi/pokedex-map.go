@@ -1,7 +1,6 @@
 package pokeapi
 
 import (
-	"fmt"
 	"io"
 	"net/http"
 	"encoding/json"
@@ -17,7 +16,7 @@ type locationData struct {
 	} `json:"results"`
 }
 
-func ListLocationData(url string) (locationData, err) {
+func ListLocationData(url string) (locationData, error) {
 	data := locationData{}
 	res, err := http.Get(url)
 	if err != nil {
