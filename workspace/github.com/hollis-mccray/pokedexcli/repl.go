@@ -5,18 +5,17 @@ import (
 	"fmt"
 	"os"
 	"strings"
-	"github.com/hollis-mccray/pokedexcli/internal/pokeapi"
 )
-
-type cliCommand struct {
-	name        string
-	description string
-	callback    func(*pokeapi.Configuration) error
-}
 
 type config struct {
 	Next     string
 	Previous string
+}
+
+type cliCommand struct {
+	name        string
+	description string
+	callback    func(*config) error
 }
 
 func startRepl() {
