@@ -8,8 +8,9 @@ import (
 )
 
 type config struct {
-	Next     string
-	Previous string
+	Next      string
+	Previous  string
+	Arguments []string
 }
 
 type cliCommand struct {
@@ -21,8 +22,7 @@ type cliCommand struct {
 func startRepl() {
 	reader := bufio.NewScanner(os.Stdin)
 	var cfg config
-	cfg.Previous = ""
-	cfg.Next = "https://pokeapi.co/api/v2/location-area/"
+	cfg.Arguments = []string{}
 	for {
 		fmt.Print("Pokedex > ")
 		reader.Scan()
@@ -36,6 +36,11 @@ func startRepl() {
 		if !ok {
 			fmt.Println("Unknown Command")
 			continue
+		}
+		if len(words) >= 2 {
+			cfg.Arguments = words[1:]
+		} else {
+			cfg.Arguments = []string{}
 		}
 		err := command.callback(&cfg)
 		if err != nil {
@@ -65,6 +70,11 @@ func listCommands() map[string]cliCommand {
 			name:        "mapb",
 			description: "Displays the previous twenty locations in Pokemon",
 			callback:    commandMapb,
+		},
+		"explore": {
+			name:        "explore",
+			description: "Displays Pokemon found in a location",
+			callback:    commandExplore,
 		},
 		"help": {
 			name:        "help",

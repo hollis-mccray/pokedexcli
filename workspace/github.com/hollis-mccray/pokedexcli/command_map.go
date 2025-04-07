@@ -10,7 +10,7 @@ func commandMap(cfg *config) error {
 		fmt.Println("Already at the end of the list.")
 		return nil
 	}
-	locationResp, err := pokeapi.ListLocationData(cfg.Next)
+	locationResp, err := pokeapi.ListlocationList(&cfg.Next)
 	if err != nil {
 		return err
 	}
@@ -30,7 +30,7 @@ func commandMapb(cfg *config) error {
 		fmt.Println("Already at the beginning of the list.")
 		return nil
 	}
-	locationResp, err := pokeapi.ListLocationData(cfg.Previous)
+	locationResp, err := pokeapi.ListlocationList(&cfg.Previous)
 	if err != nil {
 		return err
 	}
