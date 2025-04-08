@@ -5,12 +5,15 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/hollis-mccray/pokedexcli/internal/pokeapi"
 )
 
 type config struct {
-	Next      string
-	Previous  string
-	Arguments []string
+	pokeapiClient pokeapi.Client
+	Next          string
+	Previous      string
+	Arguments     []string
 }
 
 type cliCommand struct {
@@ -19,10 +22,8 @@ type cliCommand struct {
 	callback    func(*config) error
 }
 
-func startRepl() {
+func startRepl(cfg *config) {
 	reader := bufio.NewScanner(os.Stdin)
-	var cfg config
-	cfg.Arguments = []string{}
 	for {
 		fmt.Print("Pokedex > ")
 		reader.Scan()
@@ -42,7 +43,7 @@ func startRepl() {
 		} else {
 			cfg.Arguments = []string{}
 		}
-		err := command.callback(&cfg)
+		err := command.callback(cfg)
 		if err != nil {
 			fmt.Println(err)
 		}

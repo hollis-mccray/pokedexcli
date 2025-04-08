@@ -1,12 +1,12 @@
 package pokeapi
 
 import (
+	"encoding/json"
 	"io"
 	"net/http"
-	"encoding/json"
 )
 
-func ListEncounters(location string) ([]string, error) {
+func (c *Client) ListEncounters(location string) ([]string, error) {
 	url := baseURL + "/location-area/" + location
 	if location == "" {
 		return []string{}, nil

@@ -1,17 +1,29 @@
 package pokeapi
 
 import (
+	"encoding/json"
 	"io"
 	"net/http"
-	"encoding/json"
 )
 
-func ListlocationList(pageURL *string) (locationList, error) {
+func (c *Client) ListlocationList(pageURL string) (locationList, error) {
 	url := baseURL + "/location-area"
-	if pageURL != nil {
-		url = *pageURL
+	if pageURL != "" {
+		url = pageURL
 	}
+
 	data := locationList{}
+
+	if val, ok := c.cache.Get(url); ok {
+		locationsResp := locationList{}
+		err := json.Unmarshal(val, &locationsResp)
+		if err != nil {
+			return locationList{}, err
+		}
+
+		return locationsResp, nil
+	}
+
 	res, err := http.Get(url)
 	if err != nil {
 		return locationList{}, err

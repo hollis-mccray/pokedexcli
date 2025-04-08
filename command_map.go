@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/hollis-mccray/pokedexcli/internal/pokeapi"
 )
 
 func commandMap(cfg *config) error {
@@ -10,7 +9,7 @@ func commandMap(cfg *config) error {
 		fmt.Println("Already at the end of the list.")
 		return nil
 	}
-	locationResp, err := pokeapi.ListlocationList(&cfg.Next)
+	locationResp, err := cfg.pokeapiClient.ListlocationList(cfg.Next)
 	if err != nil {
 		return err
 	}
@@ -30,7 +29,7 @@ func commandMapb(cfg *config) error {
 		fmt.Println("Already at the beginning of the list.")
 		return nil
 	}
-	locationResp, err := pokeapi.ListlocationList(&cfg.Previous)
+	locationResp, err := cfg.pokeapiClient.ListlocationList(cfg.Previous)
 	if err != nil {
 		return err
 	}
