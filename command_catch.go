@@ -21,6 +21,7 @@ func commandCatch(cfg *config, args []string) error {
 	if chance <= xp {
 		fmt.Printf("%s was caught!\n", name)
 		cfg.pokeapiClient.Pokedex[name] = pokemon
+		fmt.Println("You may now inspect it with the inspect command.")
 	} else {
 		fmt.Printf("%s escaped!\n", name)
 	}
