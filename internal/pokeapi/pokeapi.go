@@ -5,7 +5,7 @@ const (
 )
 
 type locationList struct {
-	Count    int     `json:"count"`
+	Count    int    `json:"count"`
 	Next     string `json:"next"`
 	Previous string `json:"previous"`
 	Results  []struct {
@@ -14,7 +14,7 @@ type locationList struct {
 	} `json:"results"`
 }
 
-type locationDetails struct {
+type LocationDetails struct {
 	EncounterMethodRates []struct {
 		EncounterMethod struct {
 			Name string `json:"name"`

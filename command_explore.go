@@ -1,26 +1,23 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 )
 
-func commandExplore(cfg *config) error {
-	if len(cfg.Arguments) == 0 {
-		fmt.Println("Location not specified")
-		return nil
+func commandExplore(cfg *config, args []string) error {
+	if len(args) == 0 {
+		return errors.New("You must provide a location name")
 	}
-	location := cfg.Arguments[0]
-	fmt.Printf("Exploring %s...\n", location)
-	encounters, err := cfg.pokeapiClient.ListEncounters(location)
+	name := args[0]
+	location, err := cfg.pokeapiClient.GetLocation(name)
 	if err != nil {
 		return err
 	}
-	if len(encounters) != 0 {
-		for _, pokemon := range encounters {
-			fmt.Println(pokemon)
-		}
-	} else {
-		fmt.Println("No Pokemon found.")
+	fmt.Printf("Exploring %s...\n", name)
+	fmt.Println("Found Pokemon:")
+	for _, enc := range location.PokemonEncounters {
+		fmt.Printf(" - %s\n", enc.Pokemon.Name)
 	}
 	return nil
 }

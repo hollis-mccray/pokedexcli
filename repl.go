@@ -13,13 +13,12 @@ type config struct {
 	pokeapiClient pokeapi.Client
 	Next          string
 	Previous      string
-	Arguments     []string
 }
 
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(*config) error
+	callback    func(*config, []string) error
 }
 
 func startRepl(cfg *config) {
@@ -38,12 +37,11 @@ func startRepl(cfg *config) {
 			fmt.Println("Unknown Command")
 			continue
 		}
+		args := []string{}
 		if len(words) >= 2 {
-			cfg.Arguments = words[1:]
-		} else {
-			cfg.Arguments = []string{}
+			args = words[1:]
 		}
-		err := command.callback(cfg)
+		err := command.callback(cfg, args)
 		if err != nil {
 			fmt.Println(err)
 		}

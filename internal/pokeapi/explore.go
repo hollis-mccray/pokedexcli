@@ -6,30 +6,25 @@ import (
 	"net/http"
 )
 
-func (c *Client) ListEncounters(location string) ([]string, error) {
+func (c *Client) GetLocation(location string) (LocationDetails, error) {
 	url := baseURL + "/location-area/" + location
 	if location == "" {
-		return []string{}, nil
+		return LocationDetails{}, nil
 	}
 
-	data := locationDetails{}
+	data := LocationDetails{}
 	res, err := http.Get(url)
 	if err != nil {
-		return []string{}, err
+		return LocationDetails{}, err
 	}
 	body, err := io.ReadAll(res.Body)
 	if err != nil {
-		return []string{}, err
+		return LocationDetails{}, err
 	}
 	err = json.Unmarshal(body, &data)
 	if err != nil {
-		return []string{}, err
-	}
-	encounters := []string{}
-
-	for _, encounter := range data.PokemonEncounters {
-		encounters = append(encounters, encounter.Pokemon.Name)
+		return LocationDetails{}, err
 	}
 
-	return encounters, nil
+	return data, nil
 }
